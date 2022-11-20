@@ -1,0 +1,116 @@
+pgs      ::= ( createType ";"? )+ EOF
+createType
+         ::= createNodeType
+           | createEdgeType
+           | createGraphType
+createNodeType
+         ::= CREATE SP NODE SP TYPE SP nodeType
+createEdgeType
+         ::= CREATE SP EDGE SP TYPE SP edgeType
+createGraphType
+         ::= CREATE SP GRAPH SP TYPE SP graphType
+graphType
+         ::= typeName STRICT? "{" elementTypes? "}"
+elementTypes
+         ::= elementType ( "," elementType )*
+elementType
+         ::= typeName
+           | nodeType
+           | edgeType
+nodeType ::= "(" typeName labelPropertySpec ")"
+edgeType ::= endpointType "-[" typeName labelPropertySpec "]->" endpointType
+endpointType
+         ::= "(" labelPropertySpec ")"
+labelPropertySpec
+         ::= ( ":" labelSpec )? OPEN? propertySpec?
+labelSpec
+         ::= "(" labelSpec ")"
+           | "[" labelSpec "]"
+           | labelSpec ( ( "|" | "&" ) labelSpec | "?" )
+           | labelName
+           | typeName
+propertySpec
+         ::= "{" ( properties ( "," OPEN )? | OPEN )? "}"
+properties
+         ::= property ( "," property )*
+property ::= ( OPTIONAL SP )? key SP propertyType
+propertyType
+         ::= StringLiteral
+key      ::= StringLiteral
+labelName
+         ::= StringLiteral
+typeName ::= StringLiteral
+
+<?TOKENS?>
+
+CREATE   ::= ( "c" | "C" ) ( "r" | "R" ) ( "e" | "E" ) ( "a" | "A" ) ( "t" | "T" ) ( "e" | "E" )
+NODE     ::= ( "n" | "N" ) ( "o" | "O" ) ( "d" | "D" ) ( "e" | "E" )
+EDGE     ::= ( "e" | "E" ) ( "d" | "D" ) ( "g" | "G" ) ( "e" | "E" )
+OPEN     ::= ( "o" | "O" ) ( "p" | "P" ) ( "e" | "E" ) ( "n" | "N" )
+OPTIONAL ::= ( "o" | "O" ) ( "p" | "P" ) ( "t" | "T" ) ( "i" | "I" ) ( "o" | "O" ) ( "n" | "N" ) ( "a" | "A" ) ( "l" | "L" )
+TYPE     ::= ( "t" | "T" ) ( "y" | "Y" ) ( "p" | "P" ) ( "e" | "E" )
+GRAPH    ::= ( "g" | "G" ) ( "r" | "R" ) ( "a" | "A" ) ( "p" | "P" ) ( "h" | "H" )
+STRICT   ::= ( "s" | "S" ) ( "t" | "T" ) ( "r" | "R" ) ( "i" | "I" ) ( "c" | "C" ) ( "t" | "T" )
+SP       ::= WHITESPACE+
+WHITESPACE
+         ::= SPACE
+           | TAB
+           | LF
+           | VT
+           | FF
+           | CR
+           | FS
+           | GS
+           | RS
+           | US
+           | [#x1680#x180E#x2000#x2001#x2002#x2003#x2004#x2005#x2006#x2008#x2009#x200A#x2028#x2029#x205F#x3000#xA0#x2007#x202F]
+FF       ::= #xc
+EscapedSymbolicName_0
+         ::= [^`]
+RS       ::= #x001E
+StringLiteral_1
+         ::= [^"\]
+GS       ::= #x001D
+FS       ::= #x001C
+CR       ::= #xd
+SPACE    ::= " "
+TAB      ::= #x9
+StringLiteral_0
+         ::= [^"\]
+LF       ::= #xa
+VT       ::= #x000B
+US       ::= #x001F
+StringLiteral
+         ::= [A-Za-z0-9_#x2D]+
+EscapedChar
+         ::= "\" ( "\" | """ | """ | "B" | "b" | "F" | "f" | "N" | "n" | "R" | "r" | "T" | "t" | ( "U" | "u" ) HexDigit HexDigit HexDigit HexDigit ( HexDigit HexDigit HexDigit HexDigit )? )
+HexDigit ::= Digit
+           | HexLetter
+Digit    ::= "0"
+           | NonZeroDigit
+NonZeroDigit
+         ::= NonZeroOctDigit
+           | "8"
+           | "9"
+NonZeroOctDigit
+         ::= "1"
+           | "2"
+           | "3"
+           | "4"
+           | "5"
+           | "6"
+           | "7"
+HexLetter
+         ::= "A"
+           | "a"
+           | "B"
+           | "b"
+           | "C"
+           | "c"
+           | "D"
+           | "d"
+           | "E"
+           | "e"
+           | "F"
+           | "f"
+EOF      ::= $
