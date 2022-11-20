@@ -1,5 +1,10 @@
 # PG-Schema
 
+##  Table of Contents
+* [PG-Schema grammar in EBNF](ebnf)
+* [PG-Schema grammar in ANTLR](antrl)
+* [PG-Schema railroad diagrams](railroad_diagrams)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
