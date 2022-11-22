@@ -1,5 +1,7 @@
 # PG-Schema
 
+[![DOI](https://zenodo.org/badge/568072768.svg)](https://zenodo.org/badge/latestdoi/568072768)
+
 ##  Table of Contents
 * [PG-Schema grammar in EBNF](ebnf)
 * [PG-Schema grammar in ANTLR](antrl)
