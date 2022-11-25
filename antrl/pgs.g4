@@ -22,7 +22,7 @@ typeForm
     : STRICT | LOOSE ;
 
 graphTypeDefinition
-    : ('{' SP? elementTypes? SP? '}') | (IMPORTS SP typeName) ;
+    : (IMPORTS SP typeName)? SP? '{' SP? elementTypes? SP? '}';
 
 elementTypes
     :  elementType (SP? ',' SP? elementType)* ;
