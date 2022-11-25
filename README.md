@@ -6,6 +6,7 @@
 * [PG-Schema grammar in EBNF](ebnf)
 * [PG-Schema grammar in ANTLR](antrl)
 * [PG-Schema railroad diagrams](railroad_diagrams)
+* [PG-Schema examples](examples)
 
 ## Getting Started
 
